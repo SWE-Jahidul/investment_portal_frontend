@@ -1,0 +1,145 @@
+
+@media only screen and (max-width: 600px) {
+  #topHeaderTitle {
+    display: none;
+  }
+  #verticle_menu {
+    margin-top: 60px;
+  }
+  #signInmain {
+    margin-top: 70px;
+  }
+
+  #signinDeviderVerticle {
+    display: none;
+  }
+
+  #signInFormMain {
+    margin-left: 13px;
+  }
+
+  #orderListMain {
+    margin-top: 25px;
+  }
+
+  #customerListMain {
+    margin-top: 25px;
+  }
+
+  #allproductmain {
+    margin-top: 25px;
+  }
+
+  #customerReviews {
+    margin-top: 25px;
+  }
+  #topHeaderForMobile {
+    margin-top: -3px;
+    /* margin-left: -20px; */
+  }
+
+
+    #navbarbadge{
+      margin-right: -24px;
+    
+  }
+
+  #header_search{
+    width: 100px,
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  #verticle_menu {
+    position: fixed;
+  }
+  #topHeaderForMobile {
+    display: none;
+  }
+
+  #signInmain {
+    margin-top: 120px;
+    box-shadow: 10px 10px 5px 12px whitesmoke;
+  }
+
+  #signinDeviderHorizonal {
+    display: none;
+  }
+
+  #orderListMain {
+    margin: 25px;
+    padding: 12px;
+  }
+
+  #customerListMain {
+    margin: 25px;
+    padding: 12px;
+  }
+
+  #allproductmain {
+    margin: 25px;
+    padding: 12px;
+  }
+
+  #AllProjectTable {
+    padding: 10px;
+  }
+
+  #CustoerListTable {
+    padding: 10px;
+  }
+
+  #orderListTable {
+    padding: 10px;
+  }
+
+  #customerReviews {
+    padding: 10px;
+  }
+
+  #navbarbadge{
+    margin-right: 230px;
+  }
+
+
+  #homeMain{
+    margin: 25px;
+  }
+  #AddproductMain{
+    margin: 25px;
+  }
+  #addproductPageHeader{
+    margin: 25px;
+  }
+  #all_product_page_header{
+    margin: 25px;
+  }
+
+  #orderHeaderPage{
+    margin: 25px;
+
+  }
+
+
+#header_search{
+  width: 250,
+}
+
+#navbarband{
+   margin-right : -40px;
+}
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
