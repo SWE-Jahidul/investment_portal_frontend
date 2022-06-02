@@ -1,14 +1,35 @@
-import React from "react";
-
+import React, {useState} from "react";
 import loginImages from "../images/5035121.jpg";
-
 import "../shared/menu.css";
 import { Form, Input, Button, Divider } from "antd";
 import { Row, Col, Image } from "antd";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const registration = useNavigate();
+  const [email,setEmail] = useState();
+  const [password,setPassword] = useState();
+  const [alertmsg,setAlertmsg] = useState();
+
+  const userLogin = async() => {
+      axios.post("http://localhost:5000/users/login",{email,password}).then(function(data){
+      console.log(data);
+      console.log(data.data.message);
+      localStorage.setItem("userinfo",JSON.stringify(data));
+      console.log(data.data.error);
+      if(data.data.message === "successfully login"){
+        setAlertmsg("login successfully!");
+        registration("/emailotpverify");
+      }else if(data.data.error === "Invalid password"){
+        setAlertmsg("Invalid password!");
+      }else if(data.data.error === "User does not exist"){
+        setAlertmsg("User does not exist!");
+      }
+    })
+    
+  }
+
   return (
     <>
       <Row style={{ overflowX: "hide" }}>
@@ -79,6 +100,7 @@ const Login = () => {
                   label="Email"
                   name="username"
                   rules={[{ required: true }]}
+                  onChange={(e)=>setEmail(e.target.value)}
                 >
                   <Input />
                 </Form.Item>
@@ -87,12 +109,13 @@ const Login = () => {
                   label="Password"
                   name="password"
                   rules={[{ required: true }]}
+                  onChange={(e)=>setPassword(e.target.value)}
                 >
                   <Input />
                 </Form.Item>
 
                 <Form.Item style={{ float: "right", overflowX: "hide" }}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" onClick={userLogin}>
                     Login
                   </Button>
 
@@ -101,6 +124,7 @@ const Login = () => {
                     <a onClick={() => registration("/registration")}>
                       Create New Account?
                     </a>
+                    <p>{alertmsg}</p>
                   </Form.Item>
                 </Form.Item>
               </Form>

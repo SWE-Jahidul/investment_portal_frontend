@@ -1,26 +1,29 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
 import Home from "./Pages/Home";
+import EmailOTPVerify from "./Pages/EmailOTPVerify";
+
 
 function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      
         <Routes>
-          {/* Home */}
-          <Route path="/" element={<Home />} />
-          {/* Home */}
-          <Route path="/home" element={<Home />} />
-          {/* Login */}
-          <Route path="login" element={<Login />} />
-          {/* Registration  */}
-          <Route path="registration" element={<Registration />} />
+          
+          {/* <Route path="/" element={<Home />} /> */}
+          
+          
+          <Route path="/" element={<Login />} />
+          {/* <Route path="/login" element={<Login/>}/> */}
+          <Route path="/registration" element={<Registration />} />
+          <Route path="emailotpverify" element={<EmailOTPVerify/>}/>
+          <Route path="/home" element={<Home/>} /> 
         </Routes>
-      </BrowserRouter>
+      
     </div>
   );
 }
