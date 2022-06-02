@@ -76,6 +76,14 @@ const Registration = () => {
                 colon={false}
               >
                 <Form.Item
+                  label="FullName"
+                  name="fullname"
+                  rules={[{ required: true }]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
                   label="Email"
                   name="username"
                   rules={[{ required: true }]}
