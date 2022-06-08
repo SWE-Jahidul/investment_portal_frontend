@@ -11,10 +11,10 @@ const UserProvider = ({children}) => {
         const userInfo = JSON.parse(localStorage.getItem("userinfo"));
         setUser(userInfo);
 
-        if(userInfo){
-            NoUserFound("/home");
-            setUser(userInfo);
-        }
+        // if(userInfo){
+        //     NoUserFound("/home");
+        //     setUser(userInfo);
+        // }
         if(!userInfo){
             NoUserFound("/");
         }

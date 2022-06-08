@@ -1,34 +1,81 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import loginImages from "../images/5035121.jpg";
 import "../shared/menu.css";
 import { Form, Input, Button, Divider } from "antd";
 import { Row, Col, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {Base64} from 'js-base64';
 
 const Login = () => {
   const registration = useNavigate();
+  const [userdata,setUserData] = useState();
   const [email,setEmail] = useState();
   const [password,setPassword] = useState();
   const [alertmsg,setAlertmsg] = useState();
 
-  const userLogin = async() => {
-      axios.post("http://localhost:5000/users/login",{email,password}).then(function(data){
-      console.log(data);
-      console.log(data.data.message);
-      localStorage.setItem("userinfo",JSON.stringify(data));
-      console.log(data.data.error);
-      if(data.data.message === "successfully login"){
-        setAlertmsg("login successfully!");
-        registration("/emailotpverify");
-      }else if(data.data.error === "Invalid password"){
-        setAlertmsg("Invalid password!");
-      }else if(data.data.error === "User does not exist"){
-        setAlertmsg("User does not exist!");
-      }
-    })
+  // const userLogin = async() => {
+  //     axios.post("http://localhost:5000/users/login",{email,password}).then(function(data){
+  //     console.log(data);
+  //     console.log(data.data.message);
+  //     localStorage.setItem("userinfo",JSON.stringify(data));
+  //     console.log(data.data.error);
+  //     if(data.data.message === "successfully login"){
+  //       setAlertmsg("login successfully!");
+  //       registration("/emailotpverify");
+  //     }else if(data.data.error === "Invalid password"){
+  //       setAlertmsg("Invalid password!");
+  //     }else if(data.data.error === "User does not exist"){
+  //       setAlertmsg("User does not exist!");
+  //     }
+  //   })
     
+  // }
+
+  const userAllData = () => {
+
+    //Get Record - Detail View
+    axios.get("http://localhost:5000/getrecord").then(function(data){
+      console.log(data.data.data);
+      setUserData(data.data.data);
+      // localStorage.setItem("userinfo",JSON.stringify(data));
+      // setVisiable(true);
+    })
   }
+
+  const userLogin = () => {
+    if(userdata){
+      if(!email || !password){
+        console.log("plz fill the all fields");
+      }else{
+
+        for(let i=0; i<userdata.length; i++){
+          const DecodePass = Base64.decode(userdata[i]?.Password)
+          // console.log(userdata[i]?.Email)
+          // console.log(userdata[i]?.Password)
+          if(userdata[i]?.Email === email && DecodePass === password){
+            localStorage.setItem("userinfo",JSON.stringify({
+              id:userdata[i].ID,
+              name:userdata[i].Name.display_value,
+              email:userdata[i].Email
+            }))
+            console.log("Successfully login!");
+            registration("/home");
+          }
+        }
+
+      }
+    }
+    else{
+      console.log("Server problem. User not found try after sometimes");
+    }
+  }
+
+  useEffect(()=>{
+
+    userAllData();
+
+  },[]);
 
   return (
     <>
@@ -124,6 +171,7 @@ const Login = () => {
                     <a onClick={() => registration("/registration")}>
                       Create New Account?
                     </a>
+                    {/* <Button type="primary" htmlType="submit" onClick={()=>console.log(userdata)}>check</Button> */}
                     <p>{alertmsg}</p>
                   </Form.Item>
                 </Form.Item>
