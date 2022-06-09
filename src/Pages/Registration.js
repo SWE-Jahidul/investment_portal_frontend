@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import loginImages from "../images/5035121.jpg";
 import "../shared/menu.css";
 import { Form, Input, Button, Divider } from "antd";
@@ -9,45 +9,68 @@ import axios from "axios";
 const Registration = () => {
   const login = useNavigate();
 
-  const [firstname,setFirstName] = useState();
-  const [lastname,setLastName] = useState();
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState();
-  const [confirmpassword,setConfirmpassword] = useState();
-  const [picture,setPicture] = useState();
-  const [alertmsg,setAlertmsg] = useState();
+  const [firstname, setFirstName] = useState();
+  const [lastname, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [picture, setPicture] = useState();
+  const [alertmsg, setAlertmsg] = useState();
 
   const UserRegistration = () => {
-    if(!firstname || !lastname || !email || !password || !confirmpassword){
-      setAlertmsg("Plz fill up all fields!")
-    }else if(password !== confirmpassword){
+    if (!firstname || !lastname || !email || !password || !confirmpassword) {
+      setAlertmsg("Plz fill up all fields!");
+    } else if (password !== confirmpassword) {
       console.log("password not matched");
-    }else if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
-      setAlertmsg("Invalid Email entered")
-    }else if(password.length < 8){
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setAlertmsg("Invalid Email entered");
+    } else if (password.length < 8) {
       setAlertmsg("Password is too short!");
-    }else{
-      const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    } else {
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ];
       var today = new Date();
-      var date = today.getDate()+'-'+monthNames[today.getMonth()]+'-'+today.getFullYear();
-      axios.post("http://localhost:5000/addrecord",{firstname,lastname,email,password,date}).then(function(data){
-        console.log(data.data.message);
-        if(data.data.message === "Data Added Successfully"){
-          setAlertmsg("Your registration created successfully!")
-        }
-        else{
-          setAlertmsg("Server error! plz try again after sometimes");
-        }
-      })
+      var date =
+        today.getDate() +
+        "-" +
+        monthNames[today.getMonth()] +
+        "-" +
+        today.getFullYear();
+      axios
+        .post("http://localhost:5000/addrecord", {
+          firstname,
+          lastname,
+          email,
+          password,
+          date,
+        })
+        .then(function (data) {
+          console.log(data.data.message);
+          if (data.data.message === "Data Added Successfully") {
+            setAlertmsg("Your registration created successfully!");
+          } else {
+            setAlertmsg("Server error! plz try again after sometimes");
+          }
+        });
     }
     // axios.post("http://localhost:5000/addrecord").then(function(data){
     //   console.log(data);
     //   // localStorage.setItem("userinfo",JSON.stringify(data));
     //   // setVisiable(true);
     // })
-  }
+  };
 
   return (
     <>
@@ -119,49 +142,53 @@ const Registration = () => {
                   label="First Name"
                   name="firstname"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setFirstName(e.target.value)}
+                  onChange={(e) => setFirstName(e.target.value)}
                 >
-                  <Input />
+                  <Input placeholder="Input Your First Name"/>
                 </Form.Item>
 
                 <Form.Item
                   label="Last Name"
                   name="lastname"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setLastName(e.target.value)}
+                  onChange={(e) => setLastName(e.target.value)}
                 >
-                  <Input />
+                  <Input placeholder="Input Your Last Name"/>
                 </Form.Item>
 
                 <Form.Item
                   label="Email"
                   name="username"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 >
-                  <Input />
+                  <Input placeholder="Input Your Email" />
                 </Form.Item>
 
                 <Form.Item
                   label="Password"
                   name="password"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 >
-                  <Input />
+                  <Input.Password placeholder="Input Your Password" />
                 </Form.Item>
 
                 <Form.Item
                   label="Re-Type Password"
                   name="Re-Type password"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setConfirmpassword(e.target.value)}
+                  onChange={(e) => setConfirmpassword(e.target.value)}
                 >
-                  <Input />
+                  <Input.Password placeholder="Input Your Re-Password" />
                 </Form.Item>
 
                 <Form.Item style={{ float: "right", overflowX: "hide" }}>
-                  <Button type="primary" htmlType="submit" onClick={UserRegistration}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    onClick={UserRegistration}
+                  >
                     Registration
                   </Button>
                   <br></br>

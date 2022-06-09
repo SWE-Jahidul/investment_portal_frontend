@@ -4,7 +4,7 @@ import Search from "antd/lib/transfer/search";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-import { BsFillEnvelopeFill, BsFillPersonFill } from "react-icons/bs";
+import { BsFillEnvelopeFill, BsFillPersonFill,BsFillKeyFill } from "react-icons/bs";
 import "../VerticleMenu.css";
 
 const menu = (
@@ -22,7 +22,21 @@ const menu = (
         </a>
       </Link>
     </Menu.Item>
-    
+
+    <Menu.Item>
+      <Link to="/forgetpassword">
+        <a target="_blank" rel="noopener noreferrer" href="#">
+          <div style={{ display: "flex", paddingLeft: 20 }}>
+            <div>
+              <BsFillKeyFill style={{ fontSize: 20 }} />
+            </div>
+
+            <div> &nbsp; Forget Password </div>
+          </div>
+        </a>
+      </Link>
+    </Menu.Item>
+
     <Menu.Item>
       <a target="_blank" rel="noopener noreferrer" href="#">
         <div style={{ display: "flex", paddingLeft: 20 }}>
@@ -55,7 +69,6 @@ const NavbarBadge = () => {
         />
       </div>
 
-  
       <div style={{ marginLeft: 10 }}>
         <span className="avatar-item">
           <Dropdown overlay={menu} placement="bottomCenter">
