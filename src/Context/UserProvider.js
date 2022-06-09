@@ -15,9 +15,9 @@ const UserProvider = ({children}) => {
         //     NoUserFound("/home");
         //     setUser(userInfo);
         // }
-        if(!userInfo){
-            NoUserFound("/");
-        }
+        // if(!userInfo){
+        //     NoUserFound("/");
+        // }
     },[]);
 
     return(

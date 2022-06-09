@@ -1,3 +1,4 @@
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   #topHeaderTitle {
     display: none;
@@ -7,7 +8,6 @@
   }
   #signInmain {
     margin-top: 70px;
-    /* padding: 30px; */
   }
 
   #signinDeviderVerticle {
@@ -38,23 +38,19 @@
     /* margin-left: -20px; */
   }
 
-  #navbarbadge {
-    margin-right: -24px;
+
+    #navbarbadge{
+      margin-right: -24px;
+    
   }
 
-  #header_search {
-    width: 100px;
-  }
-  #forgetandcreateaccount {
-    color: rgb(141, 80, 0) !important;
+  #header_search{
+    width: 100px,
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  #forgetandcreateaccount {
-    color: rgb(141, 80, 0) !important;
-  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -110,34 +106,38 @@
     padding: 10px;
   }
 
-  #navbarbadge {
+  #navbarbadge{
     margin-right: 230px;
   }
 
-  #homeMain {
+
+  #homeMain{
     margin: 25px;
   }
-  #AddproductMain {
+  #AddproductMain{
     margin: 25px;
   }
-  #addproductPageHeader {
+  #addproductPageHeader{
     margin: 25px;
   }
-  #all_product_page_header {
+  #all_product_page_header{
     margin: 25px;
   }
 
-  #orderHeaderPage {
+  #orderHeaderPage{
     margin: 25px;
+
   }
 
-  #header_search {
-    width: 250;
-  }
 
-  #navbarband {
-    margin-right: -40px;
-  }
+#header_search{
+  width: 250,
+}
+
+#navbarband{
+   margin-right : -40px;
+}
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
