@@ -49,7 +49,7 @@ const Registration = () => {
         "-" +
         today.getFullYear();
       axios
-        .post("http://localhost:5000/addrecord", {
+        .post("https://investmentportal.herokuapp.com/addrecord", {
           firstname,
           lastname,
           email,
@@ -65,11 +65,6 @@ const Registration = () => {
           }
         });
     }
-    // axios.post("http://localhost:5000/addrecord").then(function(data){
-    //   console.log(data);
-    //   // localStorage.setItem("userinfo",JSON.stringify(data));
-    //   // setVisiable(true);
-    // })
   };
 
   return (

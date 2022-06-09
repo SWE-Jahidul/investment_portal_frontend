@@ -9,32 +9,15 @@ import { Base64 } from "js-base64";
 
 const Login = () => {
   const registration = useNavigate();
+  const forgotpassword = useNavigate();
   const [userdata, setUserData] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [alertmsg, setAlertmsg] = useState();
 
-  // const userLogin = async() => {
-  //     axios.post("http://localhost:5000/users/login",{email,password}).then(function(data){
-  //     console.log(data);
-  //     console.log(data.data.message);
-  //     localStorage.setItem("userinfo",JSON.stringify(data));
-  //     console.log(data.data.error);
-  //     if(data.data.message === "successfully login"){
-  //       setAlertmsg("login successfully!");
-  //       registration("/emailotpverify");
-  //     }else if(data.data.error === "Invalid password"){
-  //       setAlertmsg("Invalid password!");
-  //     }else if(data.data.error === "User does not exist"){
-  //       setAlertmsg("User does not exist!");
-  //     }
-  //   })
-
-  // }
-
   const userAllData = () => {
     //Get Record - Detail View
-    axios.get("http://localhost:5000/getrecord").then(function (data) {
+    axios.get("https://investmentportal.herokuapp.com/getrecord").then(function (data) {
       console.log(data.data.data);
       setUserData(data.data.data);
       // localStorage.setItem("userinfo",JSON.stringify(data));
@@ -46,6 +29,7 @@ const Login = () => {
     if (userdata) {
       if (!email || !password) {
         console.log("plz fill the all fields");
+        setAlertmsg("plz fill the all fields");
       } else {
         for (let i = 0; i < userdata.length; i++) {
           const DecodePass = Base64.decode(userdata[i]?.Password);
@@ -67,8 +51,16 @@ const Login = () => {
       }
     } else {
       console.log("Server problem. User not found try after sometimes");
+      setAlertmsg("Server problem. User not found try after sometimes");
     }
   };
+
+  const ForgotPassword = () => {
+
+    forgotpassword("/forgotpassword")
+
+
+  }
 
   useEffect(() => {
     userAllData();
@@ -179,17 +171,18 @@ const Login = () => {
                     Create New Account?
                   </a>
                   {/* <Button type="primary" htmlType="submit" onClick={()=>console.log(userdata)}>check</Button> */}
-                  {/* <p>{alertmsg}</p> */}
+                  
                 </Form.Item>
 
                 <Form.Item style={{ color: "#007DFE" }}>
-                  <a>Foget Password ?</a>
+                  <a onClick={ForgotPassword}>Foget Password ?</a>
                 </Form.Item>
               </div>
             </Form>
           </Col>
         </Row>
       </Col>
+      <p>{alertmsg}</p>
     </Row>
   );
 };
