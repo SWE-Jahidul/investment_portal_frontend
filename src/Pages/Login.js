@@ -1,18 +1,18 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import loginImages from "../images/5035121.jpg";
 import "../shared/menu.css";
 import { Form, Input, Button, Divider } from "antd";
 import { Row, Col, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Base64} from 'js-base64';
+import { Base64 } from "js-base64";
 
 const Login = () => {
   const registration = useNavigate();
-  const [userdata,setUserData] = useState();
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState();
-  const [alertmsg,setAlertmsg] = useState();
+  const [userdata, setUserData] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [alertmsg, setAlertmsg] = useState();
 
   // const userLogin = async() => {
   //     axios.post("http://localhost:5000/users/login",{email,password}).then(function(data){
@@ -29,56 +29,52 @@ const Login = () => {
   //       setAlertmsg("User does not exist!");
   //     }
   //   })
-    
+
   // }
 
   const userAllData = () => {
-
     //Get Record - Detail View
-    axios.get("http://localhost:5000/getrecord").then(function(data){
+    axios.get("http://localhost:5000/getrecord").then(function (data) {
       console.log(data.data.data);
       setUserData(data.data.data);
       // localStorage.setItem("userinfo",JSON.stringify(data));
       // setVisiable(true);
-    })
-  }
+    });
+  };
 
   const userLogin = () => {
-    if(userdata){
-      if(!email || !password){
+    if (userdata) {
+      if (!email || !password) {
         console.log("plz fill the all fields");
-      }else{
-
-        for(let i=0; i<userdata.length; i++){
-          const DecodePass = Base64.decode(userdata[i]?.Password)
+      } else {
+        for (let i = 0; i < userdata.length; i++) {
+          const DecodePass = Base64.decode(userdata[i]?.Password);
           // console.log(userdata[i]?.Email)
           // console.log(userdata[i]?.Password)
-          if(userdata[i]?.Email === email && DecodePass === password){
-            localStorage.setItem("userinfo",JSON.stringify({
-              id:userdata[i].ID,
-              name:userdata[i].Name.display_value,
-              email:userdata[i].Email
-            }))
+          if (userdata[i]?.Email === email && DecodePass === password) {
+            localStorage.setItem(
+              "userinfo",
+              JSON.stringify({
+                id: userdata[i].ID,
+                name: userdata[i].Name.display_value,
+                email: userdata[i].Email,
+              })
+            );
             console.log("Successfully login!");
             registration("/home");
           }
         }
-
       }
-    }
-    else{
+    } else {
       console.log("Server problem. User not found try after sometimes");
     }
-  }
+  };
 
-  useEffect(()=>{
-
+  useEffect(() => {
     userAllData();
-
-  },[]);
+  }, []);
 
   return (
-    <>
       <Row style={{ overflowX: "hide" }}>
         <Col
           id="signInmain"
@@ -147,7 +143,7 @@ const Login = () => {
                   label="Email"
                   name="username"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 >
                   <Input />
                 </Form.Item>
@@ -156,31 +152,45 @@ const Login = () => {
                   label="Password"
                   name="password"
                   rules={[{ required: true }]}
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 >
                   <Input />
                 </Form.Item>
 
                 <Form.Item style={{ float: "right", overflowX: "hide" }}>
-                  <Button type="primary" htmlType="submit" onClick={userLogin}>
+                  <Button  type="primary"   onClick={userLogin}>
                     Login
                   </Button>
+                </Form.Item>
 
-                  <br></br>
+                <br></br>
+                <div
+                id="forgetandcreateaccount"
+                  style={{
+                    //padding:10,
+                    marginTop: 18,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                  }}
+                >
                   <Form.Item style={{ color: "#007DFE" }}>
                     <a onClick={() => registration("/registration")}>
                       Create New Account?
                     </a>
                     {/* <Button type="primary" htmlType="submit" onClick={()=>console.log(userdata)}>check</Button> */}
-                    <p>{alertmsg}</p>
+                    {/* <p>{alertmsg}</p> */}
                   </Form.Item>
-                </Form.Item>
+
+                  <Form.Item style={{ color: "#007DFE" }}>
+                    <a>Foget Password ?</a>
+                  </Form.Item>
+                </div>
               </Form>
             </Col>
           </Row>
         </Col>
       </Row>
-    </>
   );
 };
 
