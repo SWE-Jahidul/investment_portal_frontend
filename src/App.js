@@ -9,6 +9,7 @@ import Test from "./test/Test";
 import Profile from "./Pages/Profile";
 import ResetPassword from "./Pages/ResetPassword";
 import ForgotPassword from "./Pages/ForgotPassword";
+import ConfirmForgotPassword from "./Pages/ConfirmForgotPassword";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/confirmforgotpassword" element={<ConfirmForgotPassword />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/home" element={<Home/>} /> 

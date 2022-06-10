@@ -22,6 +22,7 @@ const Registration = () => {
       setAlertmsg("Plz fill up all fields!");
     } else if (password !== confirmpassword) {
       console.log("password not matched");
+      setAlertmsg("password not matched!");
     } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       setAlertmsg("Invalid Email entered");
     } else if (password.length < 8) {

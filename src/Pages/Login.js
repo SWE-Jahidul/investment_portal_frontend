@@ -46,6 +46,8 @@ const Login = () => {
             );
             console.log("Successfully login!");
             registration("/home");
+          }else{
+            setAlertmsg("Incorrect Email and Password");
           }
         }
       }
