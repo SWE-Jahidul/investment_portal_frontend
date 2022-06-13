@@ -6,7 +6,7 @@ const { Footer } = Layout;
 const Footer1 = () => {
   return (
     <Footer style={{ textAlign: "center", marginBottom: 0 }}>
-      E-Commarch ©2021 Created by Jahidul Islam
+      Investment Portal ©2021 Created by W3s
     </Footer>
   );
 };
