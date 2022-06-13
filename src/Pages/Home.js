@@ -25,6 +25,10 @@ const Home = () => {
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+    if(!userInfo){
+      loginpage("/");
+    }
+
     if(userInfo){
         console.log(userInfo.id,userInfo.name,userInfo.email);
         setUserInfo({id:userInfo.id,name:userInfo.name,email:userInfo.email});

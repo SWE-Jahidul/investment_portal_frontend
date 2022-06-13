@@ -19,11 +19,11 @@ export default function Profile() {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
 
     useEffect(()=>{
-        if(!userInfo){
-            loginpage("/");
-        }
+      if(!userInfo){
+        loginpage("/");
+      }
 
-    })
+    },[]);
   return (
     <Layout style={{ overflowX: "hide" }}>
       <VerticleNavBar style={{ overflowX: "hide" }}></VerticleNavBar>

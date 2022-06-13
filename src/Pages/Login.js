@@ -10,6 +10,7 @@ import { Base64 } from "js-base64";
 const Login = () => {
   const registration = useNavigate();
   const forgotpassword = useNavigate();
+  const homepage = useNavigate();
   const [userdata, setUserData] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -35,6 +36,7 @@ const Login = () => {
           const DecodePass = Base64.decode(userdata[i]?.Password);
           // console.log(userdata[i]?.Email)
           // console.log(userdata[i]?.Password)
+          console.log(DecodePass);
           if (userdata[i]?.Email === email && DecodePass === password) {
             localStorage.setItem(
               "userinfo",
@@ -65,6 +67,10 @@ const Login = () => {
   }
 
   useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+    if(userInfo){
+      homepage("/home");
+    }
     userAllData();
   }, []);
 
@@ -177,7 +183,7 @@ const Login = () => {
                 </Form.Item>
 
                 <Form.Item style={{ color: "#007DFE" }}>
-                  <a onClick={ForgotPassword}>Foget Password ?</a>
+                  <a onClick={ForgotPassword}>Fogot Password ?</a>
                 </Form.Item>
               </div>
             </Form>
