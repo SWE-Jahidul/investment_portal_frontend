@@ -2,13 +2,21 @@ import React, { useEffect, useState } from "react";
 import { UserState } from "../Context/UserProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Layout, PageHeader } from "antd";
+import {
+  Button,
+  Card,
+  Col,
+  Layout,
+  PageHeader,
+  Row,
+  message,
+  Upload,
+} from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
 import VerticleNavBar from "../shared/VerticleNavBar";
 import Header1 from "../shared/Header1";
 import Footer1 from "../shared/Footer1";
-
-
 
 const { Content } = Layout;
 
@@ -21,43 +29,72 @@ const Home = () => {
   // const userId = userInfo.data._id;
   // console.log(userInfo);
   // console.log(userInfo.data.email);
-  
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-    if(!userInfo){
+    if (!userInfo) {
       loginpage("/");
     }
 
-    if(userInfo){
-        console.log(userInfo.id,userInfo.name,userInfo.email);
-        setUserInfo({id:userInfo.id,name:userInfo.name,email:userInfo.email});
-    }else{
-        loginpage("/");
+    if (userInfo) {
+      console.log(userInfo.id, userInfo.name, userInfo.email);
+      setUserInfo({
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+      });
+    } else {
+      loginpage("/");
     }
   }, []);
 
+  // File Upload
+
   return (
+  
     <Layout style={{ overflowX: "hide" }}>
       <VerticleNavBar style={{ overflowX: "hide" }}></VerticleNavBar>
 
       <Layout>
-        <Header1 style={{ overflowX: "hide" , paddingBottom:40 }}></Header1>
+        <Header1 style={{ overflowX: "hide", paddingBottom: 40 }}></Header1>
 
         <Content
           className="site-layout-background"
           style={{
-            margin: '24px 16px',
-            marginTop:60,
+            margin: "24px 16px",
+            marginTop: 60,
             padding: 24,
-            minHeight: 775,
+            minHeight: 745,
           }}
         >
-          Content
+          <Row  gutter={[16, 16]}>
+            <Col
+              xs={{ span: 24, offset: 0 }}
+              lg={{ span: 6, offset: 0 }}
+              md={{ span: 6, offset: 0 }}
+              sm={{ span: 24, offset: 0 }}
+            >
+              <div style={{ backgroundColor: "white" ,padding:20}}>
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              </div>
+            </Col>
+
+            <Col
+              xs={{ span: 24, offset: 0 }}
+              lg={{ span: 12, offset: 4 }}
+              md={{ span: 12, offset: 4 }}
+              sm={{ span: 24, offset: 0 }}
+              style={{ backgroundColor: "white" }}
+            >
+              <div  style={{padding:20}}>
+                 All Documents Print Here
+              </div>
+             
+            </Col>
+          </Row>
         </Content>
 
-        <Footer1 style={{ overflowX: "hide", }}></Footer1>
-
+        <Footer1 style={{ overflowX: "hide" }}></Footer1>
       </Layout>
     </Layout>
     // <div>
