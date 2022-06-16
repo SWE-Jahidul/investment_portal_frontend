@@ -23,12 +23,29 @@ const { Content } = Layout;
 const Home = () => {
   const loginpage = useNavigate();
   const [userinfo, setUserInfo] = useState();
+  const [file,setFile] = useState();
+  const [filename,setFileName] = useState();
   // const {user} = UserState();
   // const userInfo = JSON.parse(localStorage.getItem("userinfo"));
   // console.log(userInfo);
   // const userId = userInfo.data._id;
   // console.log(userInfo);
   // console.log(userInfo.data.email);
+
+  const onChange = e => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  }
+
+  const UploadFileHandler = () => {
+    //let formData = new FormData();
+    // formData.append("file", filename);
+    // console.log(formData);
+    // axios.post("http://localhost:5000/uploadfile",{filepath}).then(function(data){
+    //   console.log(data);
+    // })
+    
+  }
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
@@ -37,7 +54,7 @@ const Home = () => {
     }
 
     if (userInfo) {
-      console.log(userInfo.id, userInfo.name, userInfo.email);
+      //console.log(userInfo.id, userInfo.name, userInfo.email);
       setUserInfo({
         id: userInfo.id,
         name: userInfo.name,
@@ -79,6 +96,20 @@ const Home = () => {
                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
                 </Upload>
                
+              <form>
+              <div class="form-group">
+                <div>
+                <input type="file" className="custom-file-input" id="customFile" onChange={onChange}/>
+                </div>
+                <br />
+                <div>
+                <input type="submit" value="Upload" onClick={UploadFileHandler} class="btn btn-default"/>
+                </div>
+                            
+              </div>
+              </form>
+              <button onClick={UploadFileHandler}>click me for test</button>
+                {/* <Upload onChange={(e)=>setFilePath(e.target.value)}><Button icon={<UploadOutlined />} onClick={UploadFileHandler}>Click to Upload</Button></Upload> */}
               </div>
             </Col>
 
@@ -91,12 +122,12 @@ const Home = () => {
             >
               <div  style={{padding:20}}>
                  All Documents Print Here
+                 <p>file path: {filename}</p>
               </div>
              
             </Col>
           </Row>
         </Content>
-
         <Footer1 style={{ overflowX: "hide" }}></Footer1>
       </Layout>
     </Layout>
