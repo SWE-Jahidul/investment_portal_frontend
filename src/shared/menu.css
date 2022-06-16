@@ -46,8 +46,18 @@
     width: 100px;
   }
   #forgetandcreateaccount {
-    color: rgb(141, 80, 0) !important;
+    
+    margin-left: 25px;
   }
+  #login_input_filed {
+    margin-left: 11px;
+  }
+
+  /* REgistration code
+   */
+   #registration_input_field{
+    margin-left: 11px;
+   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
