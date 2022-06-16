@@ -75,7 +75,10 @@ const Home = () => {
               sm={{ span: 24, offset: 0 }}
             >
               <div style={{ backgroundColor: "white" ,padding:20}}>
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                <Upload>
+                   <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+               
               </div>
             </Col>
 
