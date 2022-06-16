@@ -92,6 +92,10 @@ const Home = () => {
               sm={{ span: 24, offset: 0 }}
             >
               <div style={{ backgroundColor: "white" ,padding:20}}>
+                <Upload>
+                   <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+               
               <form>
               <div class="form-group">
                 <div>
