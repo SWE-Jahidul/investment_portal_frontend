@@ -125,6 +125,7 @@ const Registration = () => {
               md={{ span: 10, offset: 0 }}
               sm={{ span: 24, offset: 0 }}
               style={{ marginTop: 35 }}
+              id ="registration_input_field"
             >
               <Form
                 name="wrap"
