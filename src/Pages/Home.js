@@ -111,11 +111,26 @@ const Home = () => {
               sm={{ span: 24, offset: 0 }}
             >
               <div style={{ backgroundColor: "white" ,padding:20}}>
-              <form onSubmit={UploadFileHandler}>
+              <form onSubmit={UploadFileHandler} />
               <input type="file" name="featuredImage" onChange={FileData}/>
               <br />
               <br />
               <button type="submit">Submit File</button>
+                <Upload>
+                   <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                </Upload>
+               
+              <form>
+              <div class="form-group">
+                <div>
+                <input type="file" className="custom-file-input" id="customFile" onChange={onChange}/>
+                </div>
+                <br />
+                <div>
+                <input type="submit" value="Upload" onClick={UploadFileHandler} class="btn btn-default"/>
+                </div>
+                            
+              </div>
               </form>
               <button onClick={()=>console.log(filedata)}>click me for test</button>
                 {/* <Upload onChange={(e)=>setFilePath(e.target.value)}><Button icon={<UploadOutlined />} onClick={UploadFileHandler}>Click to Upload</Button></Upload> */}

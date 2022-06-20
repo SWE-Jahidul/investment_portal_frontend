@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import loginImages from "../images/5035121.jpg";
 import "../shared/menu.css";
-import { Form, Input, Button, Divider } from "antd";
+import { Form, Input, Button, Divider, Alert, message } from "antd";
 import { Row, Col, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -60,9 +60,9 @@ const Registration = () => {
         .then(function (data) {
           console.log(data.data.message);
           if (data.data.message === "Data Added Successfully") {
-            setAlertmsg("Your registration created successfully!");
+            message.success("Your registration created successfully!");
           } else {
-            setAlertmsg("Server error! plz try again after sometimes");
+            message.error("Server error! plz try again after sometimes !");
           }
         });
     }
@@ -125,6 +125,7 @@ const Registration = () => {
               md={{ span: 10, offset: 0 }}
               sm={{ span: 24, offset: 0 }}
               style={{ marginTop: 35 }}
+              id ="registration_input_field"
             >
               <Form
                 name="wrap"
@@ -140,7 +141,7 @@ const Registration = () => {
                   rules={[{ required: true }]}
                   onChange={(e) => setFirstName(e.target.value)}
                 >
-                  <Input placeholder="Input Your First Name"/>
+                  <Input placeholder="Input Your First Name" />
                 </Form.Item>
 
                 <Form.Item
@@ -149,7 +150,7 @@ const Registration = () => {
                   rules={[{ required: true }]}
                   onChange={(e) => setLastName(e.target.value)}
                 >
-                  <Input placeholder="Input Your Last Name"/>
+                  <Input placeholder="Input Your Last Name" />
                 </Form.Item>
 
                 <Form.Item
@@ -194,6 +195,13 @@ const Registration = () => {
                 </Form.Item>
               </Form>
               <p>{alertmsg}</p>
+
+              {/* { data == null ? (
+                message.info("Please fill all the field !")
+              ) : (
+                <></>
+              )} */}
+              {/* <Alert message={alertmsg} type="error" showIcon /> */}
             </Col>
           </Row>
         </Col>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import loginImages from "../images/5035121.jpg";
 import "../shared/menu.css";
-import { Form, Input, Button, Divider } from "antd";
+import { Form, Input, Button, Divider, Alert, message } from "antd";
 import { Row, Col, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,19 +18,24 @@ const Login = () => {
 
   const userAllData = () => {
     //Get Record - Detail View
-    axios.get("https://investmentportal.herokuapp.com/getrecord").then(function (data) {
-      console.log(data.data.data);
-      setUserData(data.data.data);
-      // localStorage.setItem("userinfo",JSON.stringify(data));
-      // setVisiable(true);
-    });
+    axios
+      .get("https://investmentportal.herokuapp.com/getrecord")
+      .then(function (data) {
+        console.log(data.data.data);
+        setUserData(data.data.data);
+        // localStorage.setItem("userinfo",JSON.stringify(data));
+        // setVisiable(true);
+      });
   };
 
   const userLogin = () => {
     if (userdata) {
       if (!email || !password) {
-        console.log("plz fill the all fields");
-        setAlertmsg("plz fill the all fields");
+        //console.log("plz fill the all fields");
+        //setAlertmsg("plz fill the all fields");
+
+        // Adding new Messages
+        message.warning("Please fill all the fields !");
       } else {
         for (let i = 0; i < userdata.length; i++) {
           const DecodePass = Base64.decode(userdata[i]?.Password);
@@ -46,29 +51,31 @@ const Login = () => {
                 email: userdata[i].Email,
               })
             );
-            console.log("Successfully login!");
+            // console.log("");
+            message.success("Successfully login!");
             registration("/home");
-          }else{
+          } else {
             setAlertmsg("Incorrect Email and Password");
+            // setAlertmsg(<Alert message="Incorrect Email and Password" type="warning" showIcon closable />)
+
+            //message.error("Incorrect Email and Password");
           }
         }
       }
     } else {
-      console.log("Server problem. User not found try after sometimes");
-      setAlertmsg("Server problem. User not found try after sometimes");
+      // console.log("Server problem. User not found try after sometimes");
+      // setAlertmsg("Server problem. User not found try after sometimes");
+   //   message.success("Server problem. User not found try after sometimes!");
     }
   };
 
   const ForgotPassword = () => {
-
-    forgotpassword("/forgotpassword")
-
-
-  }
+    forgotpassword("/forgotpassword");
+  };
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-    if(userInfo){
+    if (userInfo) {
       homepage("/home");
     }
     userAllData();
@@ -130,6 +137,7 @@ const Login = () => {
             md={{ span: 10, offset: 0 }}
             sm={{ span: 24, offset: 0 }}
             style={{ marginTop: 35 }}
+            id="login_input_filed"
           >
             <Form
               name="wrap"
@@ -145,7 +153,7 @@ const Login = () => {
                 rules={[{ required: true }]}
                 onChange={(e) => setEmail(e.target.value)}
               >
-                  <Input placeholder="Input Your Email"/>
+                <Input placeholder="Input Your Email" />
               </Form.Item>
 
               <Form.Item
@@ -179,7 +187,6 @@ const Login = () => {
                     Create New Account?
                   </a>
                   {/* <Button type="primary" htmlType="submit" onClick={()=>console.log(userdata)}>check</Button> */}
-                  
                 </Form.Item>
 
                 <Form.Item style={{ color: "#007DFE" }}>
