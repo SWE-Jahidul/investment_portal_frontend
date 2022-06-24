@@ -36,7 +36,7 @@ const Home = () => {
     setFileData(e.target.files[0]);
   }
 
-  const UploadFileHandler = (e) => {
+  const UploadFileHandler = async(e) => {
     //let formData = new FormData();
     // formData.append("file", filename);
     // console.log(formData);
@@ -48,9 +48,13 @@ const Home = () => {
     const data = new FormData();
     data.append('featuredImage', filedata);
 
-    axios.post("http://localhost:5000/multerupload",data).then(function(data){
+    await axios.post("http://localhost:5000/uploadfile",data).then(function(data){
       console.log(data);
     })
+
+    // await axios.post("http://localhost:5000/postdocuments",data).then(function(data){
+    //   console.log(data.data.data.ID);
+    // })
 
     // fetch("http://localhost:5000/multerupload",{
     //   method: "POST",
@@ -63,7 +67,14 @@ const Home = () => {
     // .catch((err)=>{
     //   console.log(err.message);
     // })
-    
+     
+  }
+
+  const GetDocuments = () => {
+    const id = "3963856000000874003";
+    axios.post("http://localhost:5000/getdocuments",{id}).then(function(data){
+      console.log(data.data.data.Documents);
+    })
   }
 
   useEffect(() => {
@@ -111,29 +122,14 @@ const Home = () => {
               sm={{ span: 24, offset: 0 }}
             >
               <div style={{ backgroundColor: "white" ,padding:20}}>
-              <form onSubmit={UploadFileHandler} />
+
+              <form onSubmit={UploadFileHandler}>
               <input type="file" name="featuredImage" onChange={FileData}/>
               <br />
               <br />
               <button type="submit">Submit File</button>
-                <Upload>
-                   <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                </Upload>
-               
-              <form>
-              <div class="form-group">
-                <div>
-                <input type="file" className="custom-file-input" id="customFile" onChange={onChange}/>
-                </div>
-                <br />
-                <div>
-                <input type="submit" value="Upload" onClick={UploadFileHandler} class="btn btn-default"/>
-                </div>
-                            
-              </div>
               </form>
-              <button onClick={()=>console.log(filedata)}>click me for test</button>
-                {/* <Upload onChange={(e)=>setFilePath(e.target.value)}><Button icon={<UploadOutlined />} onClick={UploadFileHandler}>Click to Upload</Button></Upload> */}
+
               </div>
             </Col>
 
@@ -146,6 +142,7 @@ const Home = () => {
             >
               <div  style={{padding:20}}>
                  All Documents Print Here
+                 <button onClick={GetDocuments}>Documents</button>
                  {/* <p>file path: {file}</p> */}
               </div>
              
