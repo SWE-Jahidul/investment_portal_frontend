@@ -18,6 +18,7 @@ const Registration = () => {
   const [alertmsg, setAlertmsg] = useState();
 
   const UserRegistration = () => {
+    
     if (!firstname || !lastname || !email || !password || !confirmpassword) {
       setAlertmsg("Plz fill up all fields!");
     } else if (password !== confirmpassword) {
@@ -50,7 +51,7 @@ const Registration = () => {
         "-" +
         today.getFullYear();
       axios
-        .post("https://investmentportal.herokuapp.com/addrecord", {
+        .post("http://localhost:5000/addrecord", {
           firstname,
           lastname,
           email,
@@ -58,9 +59,21 @@ const Registration = () => {
           date,
         })
         .then(function (data) {
+          const userid = data.data.data.ID;
           console.log(data.data.message);
+          // console.log(data.data.data.ID);
           if (data.data.message === "Data Added Successfully") {
+            console.log(userid);
             message.success("Your registration created successfully!");
+            axios.post("http://localhost:5000/createdeskticket",{
+              firstname,
+              lastname,
+              email,
+              userid,
+            }).then(function(obj){
+              //console.log(obj);
+              login("/");
+            })
           } else {
             message.error("Server error! plz try again after sometimes !");
           }

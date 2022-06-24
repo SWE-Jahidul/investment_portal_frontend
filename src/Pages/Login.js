@@ -21,7 +21,7 @@ const Login = () => {
     axios
       .get("https://investmentportal.herokuapp.com/getrecord")
       .then(function (data) {
-        console.log(data.data.data);
+        //console.log(data.data.data);
         setUserData(data.data.data);
         // localStorage.setItem("userinfo",JSON.stringify(data));
         // setVisiable(true);
@@ -41,21 +41,29 @@ const Login = () => {
           const DecodePass = Base64.decode(userdata[i]?.Password);
           // console.log(userdata[i]?.Email)
           // console.log(userdata[i]?.Password)
-          console.log(DecodePass);
+          //console.log(DecodePass);
           if (userdata[i]?.Email === email && DecodePass === password) {
-            localStorage.setItem(
-              "userinfo",
-              JSON.stringify({
-                id: userdata[i].ID,
-                name: userdata[i].Name.display_value,
-                email: userdata[i].Email,
-              })
-            );
-            // console.log("");
-            message.success("Successfully login!");
-            registration("/home");
+            if(userdata[i].UserStatus === "Approved"){
+              localStorage.setItem(
+                "userinfo",
+                JSON.stringify({
+                  id: userdata[i].ID,
+                  name: userdata[i].Name.display_value,
+                  email: userdata[i].Email,
+                  userstatus: userdata[i].UserStatus,
+                })
+              );
+              // console.log("");
+              message.success("Successfully login!");
+              registration("/home");
+            }else if(userdata[i].UserStatus === "Pending"){
+              message.success("Your request is pending...");
+            }else{
+              message.success("Please ask an admin to grant permission to this app.");
+            }
+            
           } else {
-            setAlertmsg("Incorrect Email and Password");
+            setAlertmsg("");
             // setAlertmsg(<Alert message="Incorrect Email and Password" type="warning" showIcon closable />)
 
             //message.error("Incorrect Email and Password");
