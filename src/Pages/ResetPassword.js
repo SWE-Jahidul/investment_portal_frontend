@@ -40,9 +40,9 @@ export default function ResetPassword() {
         setAlertmsg("Invalid old password");
       } else {
         const id = userdata.id;
-        const password = userdata.password;
+        const password = newpassword;
         axios
-          .put("https://investmentportal.herokuapp.com/reset-password", {
+          .put("http://localhost:5000/reset-password", {
             id,
             password,
           })
